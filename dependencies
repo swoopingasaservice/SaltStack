@@ -1,0 +1,18 @@
+####iPY and requests packages are both required for custom IPv4 and IPv6 configuration of minions
+
+
+
+#####to install iPY on Ubuntu 22 (master)
+  apt update && sudo apt install pip
+  pip install IPy
+  pip install requests
+
+
+
+  #######to install iPY on Debian Bookworm (Proxmox 8) (minion)
+  apt update && apt install python3
+  apt install python3-ipy
+
+
+
+#####iPY only available for Debian Bookworm through python3 package manager
