@@ -1,0 +1,170 @@
+  GNU nano 6.2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              master                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ##### Primary configuration settings #####
+##########################################
+# This configuration file is used to manage the behavior of the Salt Master.
+# Values that are commented out but have an empty line after the comment are
+# defaults that do not need to be set in the config. If there is no blank line
+# after the comment then the value is presented as an example and is not the
+# default.
+
+# Per default, the master will automatically include all config files
+# from master.d/*.conf (master.d is a directory in the same directory
+# as the main master config file).
+#default_include: master.d/*.conf
+
+# The address of the interface to bind to:
+interface: 192.168.1.18
+
+# Whether the master should listen for IPv6 connections. If this is set to True,
+# the interface option must be adjusted, too. (For example: "interface: '::'")
+#ipv6: False
+
+# The tcp port used by the publisher:
+publish_port: 4505
+
+# The user under which the salt master will run. Salt will update all
+# permissions to allow the specified user to run the master. The exception is
+# the job cache, which must be deleted if this user is changed. If the
+# modified files cause conflicts, set verify_env to False.
+user: salt
+
+# Tell the master to also use salt-ssh when running commands against minions.
+#enable_ssh_minions: False
+
+# The port used by the communication interface. The ret (return) port is the
+# interface used for the file server, authentication, job returns, etc.
+ret_port: 4506
+
+# Specify the location of the daemon process ID file:
+#pidfile: /var/run/salt-master.pid
+
+# The root directory prepended to these options: pki_dir, cachedir,
+# sock_dir, log_file, autosign_file, autoreject_file, extension_modules,
+# key_logfile, pidfile, autosign_grains_dir:
+#root_dir: /
+
+# The path to the master's configuration file.
+conf_file: /etc/salt/master
+
+# Directory used to store public key data:
+#pki_dir: /etc/salt/pki/master
+
+# Key cache. Increases master speed for large numbers of accepted
+# keys. Available options: 'sched'. (Updates on a fixed schedule.)
+# Note that enabling this feature means that minions will not be
+# available to target for up to the length of the maintenance loop
+# which by default is 60s.
+#key_cache: ''
+
+# Directory to store job and cache data:
+# This directory may contain sensitive data and should be protected accordingly.
+#
+#cachedir: /var/cache/salt/master
+
+# Directory where custom modules sync to. This directory can contain
+# subdirectories for each of Salt's module types such as "runners",
+# "output", "wheel", "modules", "states", "returners", "engines",
+# "utils", etc.
+#
+# Note, any directories or files not found in the `module_dirs`
+# location will be removed from the extension_modules path.
+
+#extension_modules: /var/cache/salt/master/extmods
+
+# Directory for custom modules. This directory can contain subdirectories for
+# each of Salt's module types such as "runners", "output", "wheel", "modules",
+# "states", "returners", "engines", "utils", etc.
+#module_dirs: []
+
+# Verify and set permissions on configuration directories at startup:
+#verify_env: True
+
+# Set the number of hours to keep old job information in the job cache.
+# This option is deprecated by the keep_jobs_seconds option.
+#keep_jobs: 24
+
+# Set the number of seconds to keep old job information in the job cache:
+#keep_jobs_seconds: 86400
+
+# The number of seconds to wait when the client is requesting information
+# about running jobs.
+#gather_job_timeout: 10
+
+# Set the default timeout for the salt command and api. The default is 5
+# seconds.
+#timeout: 5
+
+# The loop_interval option controls the seconds for the master's maintenance
+# process check cycle. This process updates file server backends, cleans the
+# job cache and executes the scheduler.
+#loop_interval: 60
+
+# Set the default outputter used by the salt command. The default is "nested".
+#output: nested
+
+# To set a list of additional directories to search for salt outputters, set the
+# outputter_dirs option.
+#outputter_dirs: []
+
+# Set the default output file used by the salt command. Default is to output
+# to the CLI and not to a file. Functions the same way as the "--out-file"
+# CLI option, only sets this to a single file for all salt commands.
+#output_file: None
+
+# Return minions that timeout when running commands like test.ping
+#show_timeout: True
+
+# Tell the client to display the jid when a job is published.
+#show_jid: False
+
+# By default, output is colored. To disable colored output, set the color value
+# to False.
+#color: True
+
+# Do not strip off the colored output from nested results and state outputs
+# (true by default).
+# strip_colors: False
+
+# To display a summary of the number of minions targeted, the number of
+# minions returned, and the number of minions that did not return, set the
+# cli_summary value to True. (False by default.)
+#
+#cli_summary: False
+
+# Set the directory used to hold unix sockets:
+#sock_dir: /var/run/salt/master
+
+# The master can take a while to start up when lspci and/or dmidecode is used
+# to populate the grains for the master. Enable if you want to see GPU hardware
+# data for your master.
+# enable_gpu_grains: False
+
+# The master maintains a job cache. While this is a great addition, it can be
+# a burden on the master for larger deployments (over 5000 minions).
+# Disabling the job cache will make previously executed jobs unavailable to
+# the jobs system and is not generally recommended.
+#job_cache: True
+
+# Cache minion grains, pillar and mine data via the cache subsystem in the
+# cachedir or a database.
+#minion_data_cache: True
+
+# Cache subsystem module to use for minion data cache.
+#cache: localfs
+# Enables a fast in-memory cache booster and sets the expiration time.
+#memcache_expire_seconds: 0
+# Set a memcache limit in items (bank + key) per cache storage (driver + driver_opts).
+#memcache_max_items: 1024
+# Each time a cache storage got full cleanup all the expired items not just the oldest one.
+#memcache_full_cleanup: False
+# Enable collecting the memcache stats and log it on `debug` log level.
+#memcache_debug: False
+
+# Store all returns in the given returner.
+# Setting this option requires that any returner-specific configuration also
+# be set. See various returners in salt/returners for details on required
+# configuration values. (See also, event_return_queue, and event_return_queue_max_seconds below.)
+#
+#event_return: mysql
+
+# On busy systems, enabling event_returns can cause a considerable load on
+# the storage system for returners. Events can be queued on the master and
